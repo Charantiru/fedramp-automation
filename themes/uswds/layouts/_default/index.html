@@ -1,0 +1,24 @@
+{{ define "head" }}
+{{ partialCached "head.html" . }}
+{{ end }}
+
+{{ define "main" }}
+{{ with .Params.usabanner }}{{ partialCached "components/banner.html" . }}{{ end }}
+{{ with .Params.draftbanner }}{{ partialCached "components/draft-banner.html" . }}{{ end }}
+{{ partialCached "components/header-extended.html" . }}
+<main id="main-content" class="usa-layout-docs">
+  {{ if or (.HasShortcode "usa-section") (.HasShortcode "usa-grid-container") (.HasShortcode "usa-hero") (.HasShortcode "usa-tagline") }}
+    {{- .Content -}}
+  {{ else }}
+  <section id="index-content" class="usa-section">
+    <div class="grid-container">
+    {{ .Content }}
+    </div>
+  </section>
+  {{ end }}
+</main>
+{{ end }}
+
+{{ define "foot" }}
+{{ partialCached "foot.html" . }}
+{{ end }}
